@@ -1,18 +1,9 @@
 #!/bin/bash
-#
-# https://github.com/P3TERX/Actions-OpenWrt
-# File name: diy-part1.sh
-# Description: OpenWrt DIY script part 1 (Before Update feeds)
-#
-# Copyright (c) 2019-2024 P3TERX <https://p3terx.com>
-#
-# This is free software, licensed under the MIT License.
-# See /LICENSE for more information.
-#
+# diy-part1.sh
 
-# Uncomment a feed source
-#sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
+# 1. 引入 PassWall 依赖包源 (Xray, Sing-box 等核心)
+echo 'src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main' >> feeds.conf.default
 
-# Add a feed source
-echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
-#echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
+# 2. SmartDNS 通常在 ImmortalWrt 官方包里就有，为了确保最新，也可以直接拉取官方源码
+# echo 'src-git smartdns https://github.com/pymumu/openwrt-smartdns' >> feeds.conf.default
+# echo 'src-git luci_smartdns https://github.com/pymumu/luci-app-smartdns' >> feeds.conf.default
