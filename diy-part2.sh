@@ -1,20 +1,14 @@
 #!/bin/bash
-#
-# https://github.com/P3TERX/Actions-OpenWrt
-# File name: diy-part2.sh
-# Description: OpenWrt DIY script part 2 (After Update feeds)
-#
-# Copyright (c) 2019-2024 P3TERX <https://p3terx.com>
-#
-# This is free software, licensed under the MIT License.
-# See /LICENSE for more information.
-#
+# diy-part2.sh
 
-# Modify default IP
-#sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
+# 移除自带的老版本 passwall / passwall2 (防止冲突)
+rm -rf feeds/luci/applications/luci-app-passwall*
 
-# Modify default theme
-#sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
+# 拉取 PassWall2 最新代码到 package 目录
+git clone https://github.com/Openwrt-Passwall/openwrt-passwall2.git package/passwall-luci-2
 
-# Modify hostname
-#sed -i 's/OpenWrt/P3TERX-Router/g' package/base-files/files/bin/config_generate
+# 拉取 EasyTier 的 OpenWrt 插件和依赖
+git clone https://github.com/EasyTier/EasyTier-OpenWrt.git package/easytier
+
+# 更改默认 IP (可选，防止与光猫冲突)
+# sed -i 's/192.168.1.1/192.168.5.1/g' package/base-files/files/bin/config_generate
